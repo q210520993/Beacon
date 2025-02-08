@@ -14,6 +14,6 @@ interface IPluginManager {
 
     fun enablePlugins()
     fun disablePlugins()
-    fun activePlugin(plugin: Plugin): Plugin?
+    fun activePlugin(plugin: Plugin)
     fun activePlugins()
 }

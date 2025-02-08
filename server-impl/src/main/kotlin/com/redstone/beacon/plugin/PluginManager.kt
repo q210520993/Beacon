@@ -13,7 +13,7 @@ import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-object PluginManager {
+object PluginManager : IPluginManager {
 
     internal val libsFile = File("libs")
     internal val pluginFile = File("plugins")
@@ -62,7 +62,7 @@ object PluginManager {
     }
 
     //加载插件
-    fun loadPlugin(file: File): Plugin? {
+    override fun loadPlugin(file: File): Plugin? {
         classLoaders.forEach {
             if (it.isFileIgnored(file)) {
                 try {
@@ -80,7 +80,7 @@ object PluginManager {
         return null
     }
 
-    fun loadPlugins() {
+    override fun loadPlugins() {
 //        state = State.PRE_INIT
         if (!pluginFile.exists()) {
             if (!pluginFile.mkdirs()) {
@@ -131,7 +131,7 @@ object PluginManager {
 
     }
 
-    fun enablePlugin(plugin: Plugin) {
+    override fun enablePlugin(plugin: Plugin) {
         if (plugin.enable) {
             LOGGER.error("插件${plugin.origin.name}已经被启用了！")
         }
@@ -140,7 +140,7 @@ object PluginManager {
     }
 
     //开启插件
-    fun enablePlugins() {
+    override fun enablePlugins() {
         plugins.forEach { (_, u) ->
             enablePlugin(u)
         }
@@ -261,7 +261,7 @@ object PluginManager {
 
 
     //激活插件
-    fun activePlugin(plugin: Plugin) {
+    override fun activePlugin(plugin: Plugin) {
         if (plugin.active) {
             LOGGER.error("插件${plugin.origin.name}已经被激活了！")
         }
@@ -269,20 +269,20 @@ object PluginManager {
         EventDispatcher.call(PluginActiveEvent(plugin))
     }
 
-    fun activePlugins() {
+    override fun activePlugins() {
         plugins.forEach { (_, plugin) ->
             activePlugin(plugin)
         }
     }
 
-    fun disablePlugins() {
+    override fun disablePlugins() {
         plugins.forEach { (_, plugin) ->
             disablePlugin(plugin)
         }
     }
 
     //关闭插件
-    fun disablePlugin(plugin: Plugin) {
+    override fun disablePlugin(plugin: Plugin) {
         plugin.pluginLoader.disablePlugin(plugin)
         EventDispatcher.call(PluginDisableEvent(plugin))
     }
