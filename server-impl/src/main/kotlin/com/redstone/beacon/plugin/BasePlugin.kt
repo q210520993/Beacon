@@ -18,7 +18,7 @@ import java.nio.file.StandardCopyOption
 abstract class BasePlugin: Plugin {
 
     final override lateinit var origin: PluginDescription
-    override lateinit var pluginLoader: PluginLoader
+    override lateinit var pluginService: PluginService
     override lateinit var pluginClassLoader: ClassLoader
     override lateinit var logger: ComponentLogger
     override lateinit var dataDirectory: Path
@@ -32,10 +32,10 @@ abstract class BasePlugin: Plugin {
         private set
 
     // 初始化插件的相关信息
-    fun init(pluginLoader: PluginLoader, classLoader: ClassLoader, description: PluginDescription, dataFolder: Path, file: File) {
+    fun init(pluginService: PluginService, classLoader: ClassLoader, description: PluginDescription, dataFolder: Path, file: File) {
         if (!isInit) {
             isInit = true
-            this.pluginLoader = pluginLoader
+            this.pluginService = pluginService
             this.pluginClassLoader = classLoader
             this.origin = description
             this.dataDirectory = dataFolder

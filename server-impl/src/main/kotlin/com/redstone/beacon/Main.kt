@@ -2,6 +2,7 @@ package com.redstone.beacon
 
 import com.redstone.beacon.DataObject.minestomData
 import com.redstone.beacon.plugin.BeaconHook
+import com.redstone.beacon.plugin.PluginManager
 import com.redstone.beacon.terminal.EasyTerminal
 import net.minestom.server.MinecraftServer
 import net.minestom.server.extras.bungee.BungeeCordProxy
@@ -35,6 +36,11 @@ fun main() {
     beacon.active()
     MinecraftServer.getSchedulerManager().buildShutdownTask {
         EasyTerminal.stop()
+    }
+
+    PluginManager.classLoaders.forEach {(_, classLoader) ->
+        println(classLoader)
+
     }
 }
 //第三步 启动跑跑基准测试

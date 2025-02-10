@@ -8,5 +8,4 @@ interface DependenciesLoader {
     fun loadDependencies(description: PluginDescription, classLoader: PluginClassLoader)
     fun loadDependicyToPlugin(description: PluginDescription, dependency: ResolvedDependency, classLoader: PluginClassLoader)
 
-
 }

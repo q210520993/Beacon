@@ -4,3 +4,4 @@ plugins {
 rootProject.name = "Beacon"
 
 include("api", "server-impl")
+include("dependency")

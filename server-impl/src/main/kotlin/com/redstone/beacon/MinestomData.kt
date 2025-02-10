@@ -31,7 +31,6 @@ object DataObject {
 
 }
 
-@JvmRecord
 data class MinestomData(val network: Network, val proxy: Proxy, val server: Server) {
     class Network() {
         var ip = "127.0.0.1"

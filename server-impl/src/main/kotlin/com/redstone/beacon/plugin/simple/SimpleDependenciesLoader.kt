@@ -5,16 +5,17 @@ import com.redstone.beacon.plugin.PluginDescription
 import com.redstone.beacon.plugin.PluginManager
 import net.minestom.dependencies.DependencyGetter
 import net.minestom.dependencies.ResolvedDependency
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object SimpleDependenciesLoader: DependenciesLoader {
-    val log = LoggerFactory.getLogger(SimpleDependenciesLoader::class.java)
+    private val log: Logger = LoggerFactory.getLogger(SimpleDependenciesLoader::class.java)
 
     override fun loadDependencies(description: PluginDescription, classLoader: PluginClassLoader) {
         val dependency = DependencyGetter()
         dependency.addMavenResolver(description.dependencies!!.repositories)
         description.dependencies!!.artifacts.forEach {
-            val resolver = dependency.get(it, PluginManager.libsFile)
+            val resolver = dependency.get(it, PluginManager.libsFile.toPath())
             loadDependicyToPlugin(description, resolver, classLoader)
             log.trace("依赖：{}", resolver)
         }

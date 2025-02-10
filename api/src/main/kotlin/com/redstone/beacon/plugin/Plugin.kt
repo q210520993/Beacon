@@ -23,7 +23,7 @@ interface Plugin {
     /**
      * 获取插件加载器
      */
-    val pluginLoader: PluginLoader
+    val pluginService: PluginService
 
     /**
      * 插件启用时调用
