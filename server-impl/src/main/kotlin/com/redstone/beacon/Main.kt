@@ -1,17 +1,19 @@
 package com.redstone.beacon
 
 import com.redstone.beacon.DataObject.minestomData
-import com.redstone.beacon.plugin.BeaconHook
-import com.redstone.beacon.plugin.PluginManager
 import com.redstone.beacon.terminal.EasyTerminal
 import net.minestom.server.MinecraftServer
 import net.minestom.server.extras.bungee.BungeeCordProxy
 import net.minestom.server.extras.lan.OpenToLAN
 import net.minestom.server.extras.velocity.VelocityProxy
 import net.minestom.server.utils.time.TimeUnit
+import java.io.File
 import java.lang.String
 import java.time.Duration
 
+/**
+ * @author By Clok
+ * */
 fun main() {
 
     //初始化服务器信息
@@ -24,25 +26,18 @@ fun main() {
     setProperty()
     //第二步开服与初始化插件系统实例
     val server = MinecraftServer.init()
-    val beacon = BeaconHook(server)
     //第三步，进行proxy处理
     proxyHandle(proxyData, networkData)
     //第四步，启动性能测试
     runBenchMark(serverData)
     //第五步，启动插件！启动服务器！
-    beacon.start()
     server.start(networkData.ip, networkData.port)
     //第六步，激活插件！设立一个终端关闭的任务
-    beacon.active()
     MinecraftServer.getSchedulerManager().buildShutdownTask {
         EasyTerminal.stop()
     }
-
-    PluginManager.classLoaders.forEach {(_, classLoader) ->
-        println(classLoader)
-
-    }
 }
+
 //第三步 启动跑跑基准测试
 private fun runBenchMark(serverData: MinestomData.Server) {
     if (serverData.benchmark) {
@@ -79,4 +74,3 @@ private fun setProperty() {
         String.valueOf(minestomData.server.entityViewDistance)
     )
 }
-

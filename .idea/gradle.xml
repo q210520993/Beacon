@@ -10,6 +10,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/api" />
+            <option value="$PROJECT_DIR$/demoPlugin" />
+            <option value="$PROJECT_DIR$/demoPlugin/Fightsystem" />
             <option value="$PROJECT_DIR$/dependency" />
             <option value="$PROJECT_DIR$/server-impl" />
           </set>

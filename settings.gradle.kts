@@ -5,3 +5,6 @@ rootProject.name = "Beacon"
 
 include("api", "server-impl")
 include("dependency")
+include("demoPlugin")
+include("demoPlugin:Fightsystem")
+findProject(":demoPlugin:Fightsystem")?.name = "Fightsystem"
