@@ -2,15 +2,25 @@ package com.redstone.beacon.newPlugin
 
 interface ISorter {
 
-    fun sort(list: List<Descriptor>): List<Descriptor>
+    fun sort(list: List<Descriptor>): SortResult
 
 }
 
-class Result {
+class SortResult {
     // 这个是强依赖缺失列表 插件名称 -> 依赖信息
-    val wrongDependencies = HashMap<String, List<Dependency.PluginDependency>>()
+    val wrongDependencies = AutoHashMap()
     // 这个是版本依赖缺失列表 插件名称 -> 依赖信息
-    val wrongVersion = HashMap<String, List<Dependency.PluginDependency>>()
+    val wrongVersion = AutoHashMap()
+    // 这个是版本依赖缺失列表 插件名称 -> 依赖信息
+    val wrongSoftDependencies = AutoHashMap()
     // 正确处理后的
-    val sortedPlugins = ArrayList<String>()
+    lateinit var sortedPlugins: List<String>
+
+    inner class AutoHashMap : HashMap<String, MutableList<String>>() {
+        override fun get(key: String): MutableList<String> {
+            val a = super.get(key) ?: return put(key, mutableListOf()) ?: mutableListOf()
+            return a
+        }
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.redstone.beacon.newPlugin
 
 enum class PluginState {
-    // 插件准备阶段，准备好了插件描述符
+    // 插件准备阶段，刚刚包装好插件
     CREATED,
     // 插件处于关闭状态
     DISABLE,

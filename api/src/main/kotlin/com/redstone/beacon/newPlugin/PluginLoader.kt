@@ -4,5 +4,5 @@ import java.net.URL
 
 interface PluginLoader {
     fun isApplicable(url: URL): Boolean
-    fun loadPlugin(url: URL, descriptor: Descriptor): ClassLoader?
+    fun loadPlugin(url: URL, descriptor: Descriptor): ClassLoader
 }

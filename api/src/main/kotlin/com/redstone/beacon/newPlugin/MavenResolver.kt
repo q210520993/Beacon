@@ -15,7 +15,7 @@ open class MavenResolver(
         val value = super.get(key)
         if (value != null) return value
 
-        if (key !in pluginManager.loadPlugins()) {
+        if (key !in pluginManager.getPlugins()) {
             throw IllegalArgumentException("Plugin with key '$key' is not loaded or does not exist.")
         }
 

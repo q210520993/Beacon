@@ -1,10 +1,13 @@
 package com.redstone.beacon.newPlugin
 
 class PluginWrapper(
-    val pluginManager: PluginManager, val pluginDescriptor: Descriptor, val classLoader: PluginClassLoader
+    val pluginManager: PluginManager, val pluginDescriptor: Descriptor
 ) {
 
     lateinit var pluginFactory: PluginFactory
+
+    lateinit var classLoader: PluginClassLoader
+        private set
 
     lateinit var pluginState: PluginState
 
